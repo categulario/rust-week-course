@@ -73,7 +73,9 @@
           <textarea data-template>
             ## Instalación
 
-            ![rustup.rs](https://rustup.rs/)
+            https://rustup.rs/
+
+            En windows es necesario `Visual C++` y en linux `gcc`
           </textarea>
         </section>
 
@@ -168,12 +170,12 @@
             ```rust
             // tuplas!
             let tupla = (1, 'a', false);
-            tupla.1 == 'a'
+            assert_eq!(tupla.1, 'a');
 
             // arreglos de tamaño fijo
             let arr = [1, 2, 3, 4];
             let arr = [0; 10]; // 10 ceros
-            arr[0] == 0
+            assert_eq!(arr[0], 0);
             ```
             Viven en el stack
           </textarea>
@@ -204,7 +206,7 @@
                 // esto es infinito
             }
 
-            let x =10;
+            let mut x =10;
             while x > 0 {
                 x-=1;
             }
@@ -268,13 +270,16 @@
             * Cuando el dueño sale de scope el valor es eliminado de memoria
 
             ```rust
-            let x = String::new("hola"); // información que vive en el heap
+            let x = String::from("hola"); // información que vive en el heap
             let z = x;
-            let y = &x;
+            // descomenta esta línea y trata de compilar ¿por qué no compila?
+            // let y = &x; 
 
-            foo(x);
+            // ¿Qué sucede si tratas de descomentar esta línea?
+            // foo(x);
 
-            println!("{}", y);
+            // ¿Será posible descomentar esta línea y correr el código?
+            // println!("{}", x);
             ```
           </textarea>
         </section>
@@ -322,15 +327,15 @@
             Para evitar que valores sean consumidos por funciones se usan referencias, esto se conoce como borrowing
 
             ```rust
-            fn len(cadena: &String) -> i32 {
+            fn len(cadena: &String) -> usize {
                 cadena.len()
             }
 
             fn main() {
                 let nombre = String::from("Rosario");
-                let longitud = len(nombre);
+                let longitud = len(&nombre);
 
-                println!("{} tiene {} caracteres", mensaje, longitud);
+                println!("{} tiene {} caracteres", nombre, longitud);
             }
             ```
           </textarea>
@@ -353,7 +358,7 @@
 
             * String *vive en el heap*
             * &'static str *vive en el binario*
-            * &str apunta a un fragmento de cadena donde se encuentre
+            * &str apunta a un fragmento de cadena donde sea que se encuentre
           </textarea>
         </section>
 
@@ -368,6 +373,7 @@
             let s3 = &s1[0..3]; // [..3], [0..] y [..] son válidos
 
             println!("{}", s3);
+            // ¿Qué imprime este programa?
             ```
           </textarea>
         </section>
@@ -376,27 +382,30 @@
           <textarea data-template>
             ## Ejercicio
 
-            Escribir una función que reciba una cadena (sin tomar propiedad de ella) y devuelva una referencia a su primera frase entre comillas.
+            Escribir una función que reciba una cadena (sin tomar propiedad de ella) y devuelva una referencia a su primera frase entre comillas. Puedes rellenar en el siguiente código.
+
+            ```rust
+            fn lee_comillas(cadena: &str) -> &str {
+                // impleméntame
+            }
+
+            fn main() {
+                let frase = "El \"Veloz\" murciélago hindú";
+                let comillas = lee_comillas(frase);
+
+                println!("La frase \"{}\" tiene \"{}\" entre comillas", frase, comillas);
+            }
+            ```
           </textarea>
         </section>
 
         <section data-markdown>
           <textarea data-template>
-            ## Structs
+            ## Documentación
 
-            ```rust
-            struct Point {
-                x: i32,
-                y: i32,
-            }
-
-            struct Color(u8, u8, u8);
-
-            fn main() {
-                let p = Point{ x: 5, y: -6};
-                let c = Color(0x45, 0x33, 0xfa);
-            }
-            ```
+            * https://doc.rust-lang.org/std/
+            * https://doc.rust-lang.org/book/
+            * https://rust-lang.org
           </textarea>
         </section>
       </div>

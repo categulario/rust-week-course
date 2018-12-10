@@ -1,0 +1,423 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>The rust programming language</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <textarea data-template>
+            # Rust
+            Programación de Sistemas para todos
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Características
+
+            * Fuertemente y estáticamente tipado
+            * Veloz y austero en memoria
+            * Interoperable con C
+            * Ergonómico
+            * Seguro
+            * Algunas características funcionales
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Garantías en tiempo de compilación
+
+            * Seguridad de la memoria
+              - Referencias siempre válidas
+              - Overflow está prohibido
+            * Hilos sin condiciones de carrera
+            * Entorno de ejecución mínimo
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Historia
+
+            * 2006 Proyecto personal de Graydon Hoare en Mozilla
+            * 2009 Mozilla comienza a apoyar el proyecto
+            * 2010 Anunciado en sociedad
+            * 2011 Se compila a sí mismo
+            * 2015 Rust 1.0
+            * 2016, 2017, 2018 Lenguaje más apreciado por sus usuarios (Stackoverflow)
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Instalación
+
+            ![rustup.rs](https://rustup.rs/)
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## ¿Qué hay en la caja?
+
+            * `rustc`
+            * `cargo`
+            * otras cosas bonitas
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Hola, mundo!
+
+            ```rust
+            // hola_mundo.rs
+            fn main() {
+                println!("Hola, mundo!");
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Sintaxis
+
+            ```rust
+            // comentarios de una sola línea y múltiples líneas son iguales
+
+            const PI: f64 = 3.141592;
+
+            fn funcion(arg1: i32, arg2: i32) -> i32 {
+                arg1 + arg2
+            }
+
+            fn main() {
+                let x = 5;
+                let y = 6;
+
+                println!("{}", funcion(x, y));
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Tipos de dato escalares
+
+            ```rust
+            // enteros sin signo
+            u8, u16, u32, u64, u128
+            // enteros con signo
+            i8, i16, i32, i64, i128
+            // dependiendo la arquitectura
+            usize, isize
+            // flotantes
+            f32, f64
+            // booleanos
+            bool
+            // caracteres
+            char
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Así se escriben
+
+            ```rust
+            let decimal = 1_223;
+            let hexadecimal = 0xac;
+            let octal = 0o77;
+            let binario = 0b101;
+            let byte = b'A'; // solo u8
+            let float = 3.1432;
+            let caracter = '녕';
+            let booleano = false;
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Colecciones
+
+            ```rust
+            // tuplas!
+            let tupla = (1, 'a', false);
+            tupla.1 == 'a'
+
+            // arreglos de tamaño fijo
+            let arr = [1, 2, 3, 4];
+            let arr = [0; 10]; // 10 ceros
+            arr[0] == 0
+            ```
+            Viven en el stack
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Condicionales
+
+            ```rust
+            if x > 0 {
+                // ..
+            } else if x < 0 {
+                // ..
+            } else {
+                // ..
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Bucles
+
+            ```rust
+            loop {
+                // esto es infinito
+            }
+
+            let x =10;
+            while x > 0 {
+                x-=1;
+            }
+
+            let a = [10, 20, 30];
+            for item in a.iter() {
+                println!("{}", item);
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Expresiones
+
+            Casi todo es una expresión, y las expresiones no incluyen `;`
+
+            * operaciones
+            * condicionales
+            * funciones
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Ejemplo
+
+            ```rust
+            fn foo(x: i32) -> &'static str {
+                if x == 0 {
+                    return "cero";
+                }
+
+                if x>0 {
+                    "positivo"
+                } else {
+                    "negativo"
+                }
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Ejercicios
+
+            * Fizz Buzz
+            * Calcular el nésimo primo
+            * Secuencia fibonacci
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Pertenencia (Ownership)
+
+            * Cada valor en rust tiene una variable que es *la dueña*
+            * Solo puede haber un dueño a la vez
+            * Cuando el dueño sale de scope el valor es eliminado de memoria
+
+            ```rust
+            let x = String::new("hola"); // información que vive en el heap
+            let z = x;
+            let y = &x;
+
+            foo(x);
+
+            println!("{}", y);
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## ¿Qué cosas aplican pertenencia?
+
+            * Cosas almacenadas en el heap generalmente
+            * anotadas con el trait `Drop`
+
+            ## ¿Y el resto?
+
+            * pueden copiar sus valores (trait `Copy`)
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Devolver pertenencia
+
+            ```rust
+            fn toma_y_devuelve(mut name: String) -> String {
+                name.push_str(" me cae bien");
+
+                name
+            }
+
+            fn main() {
+                let nombre = String::from("Rosario");
+
+                let mensaje = toma_y_devuelve(nombre);
+
+                println!("{}", mensaje);
+                // println!("{}", nombre); <- esto no compila
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Referencias
+
+            Para evitar que valores sean consumidos por funciones se usan referencias, esto se conoce como borrowing
+
+            ```rust
+            fn len(cadena: &String) -> i32 {
+                cadena.len()
+            }
+
+            fn main() {
+                let nombre = String::from("Rosario");
+                let longitud = len(nombre);
+
+                println!("{} tiene {} caracteres", mensaje, longitud);
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Reglas de las referencias
+
+            * Se puede tener ya sea exactamente una referencia mutable o varias inmutables
+            * Deben ser siempre válidas
+
+            Esto lo verifica el compilador
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Cadenas en Rust
+
+            * String *vive en el heap*
+            * &'static str *vive en el binario*
+            * &str apunta a un fragmento de cadena donde se encuentre
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Creando los distintos tipos de cadenas
+
+            ```rust
+            let s0 = String::new();
+            let s1 = String::from("bla bla");
+            let s2 = "hola";
+            let s3 = &s1[0..3]; // [..3], [0..] y [..] son válidos
+
+            println!("{}", s3);
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Ejercicio
+
+            Escribir una función que reciba una cadena (sin tomar propiedad de ella) y devuelva una referencia a su primera frase entre comillas.
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Structs
+
+            ```rust
+            struct Point {
+                x: i32,
+                y: i32,
+            }
+
+            struct Color(u8, u8, u8);
+
+            fn main() {
+                let p = Point{ x: 5, y: -6};
+                let c = Color(0x45, 0x33, 0xfa);
+            }
+            ```
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        history: true,
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>

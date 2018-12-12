@@ -78,7 +78,7 @@
 
             https://rustup.rs/
 
-            En windows es necesario `Visual C++` y en linux `gcc`
+            En windows es necesario `Visual C++` y en linux `gcc`. En linux y mac es necesario modificar el archivo `~/.bashrc` y añadir esta línea: `export PATH=$PATH:$HOME/.cargo/bin`
           </textarea>
         </section>
 
@@ -102,6 +102,20 @@
                 println!("Hola, mundo!");
             }
             ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Compilar desde la consola
+
+            ```bash
+            $ rustc hola_mundo.rs
+            $ # Para ejecutar:
+            $ ./hola_mundo
+            ```
+
+            En windows ejecutar es: `> hola_mundo`
           </textarea>
         </section>
 
@@ -409,6 +423,65 @@
             * https://doc.rust-lang.org/std/
             * https://doc.rust-lang.org/book/
             * https://rust-lang.org
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Cargo
+
+            Nos ayuda a automatizar tareas y organizar proyectos
+
+            * Nuevo proyecto binario: `cargo new --bin`
+            * Nueva biblioteca: `cargo new --lib`
+            * Compilar proyecto: `cargo build`
+            * Ejecutar proyecto: `cargo run` (también compila si hace falta)
+            * Checar errores de compilación sin construir: `cargo check` (es más rápido que build)
+            * Correr tests: `cargo test`
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Structs
+
+            Una forma de definir nuestros propios tipos
+
+            ```rust
+            struct Point {
+              x: i32,
+              y: i32,
+            }
+
+            struct Color(u8, u8, u8);
+
+            fn main() {
+                let p = Point{ x: 4, y: 5 };
+                let c = Color(0xff, 0x45, 0xc3);
+            }
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Los tipos implementan Traits
+
+            Abstraen la idea de *contratos*
+
+            ```rust
+            #[derive(Debug)]
+            struct Point {
+              x: i32,
+              y: i32,
+            }
+
+            fn main() {
+                let p = Point{ x: 4, y: 5 };
+
+                println!("{:?}", p);
+            }
+            ```
           </textarea>
         </section>
       </div>
